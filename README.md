@@ -41,7 +41,7 @@ To run this project locally, follow these steps:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/SabbirMMS/React-Routing-Practices.git
+git clone https://github.com/your-username/react-router-firebase.git
 cd react-router-firebase
 ```
 
@@ -108,47 +108,3 @@ Contributions are welcome! Feel free to fork this repository, create a new branc
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
----
-
-## Deployment Setup for React Router
-
-When deploying a React app that uses React Router, you need to ensure proper routing configurations for both **Vercel** and **Netlify**. Here’s how to set it up for each platform:
-
-### **For Vercel**
-1. Create a `vercel.json` file in the root of your project.
-2. Add the following content to the file:
-   ```json
-   {
-       "rewrites": [
-           {
-               "source": "/(.*)",
-               "destination": "/index.html"
-           }
-       ]
-   }
-   ```
-3. This ensures that all routes are redirected to `index.html`, allowing React Router to handle navigation.
-
-### **For Netlify**
-1. Create a `_redirects` file in the root of your project. (no extension required)
-  - project-root/
-      ├── public/
-      ├── src/
-      ├── _redirects
-      ├── package.json
-      ├── README.md
-
-2. Add the following line:
-   ```plaintext
-   /*    /index.html   200
-   ```
-3. This will redirect all routes to `index.html` with a `200 OK` status, enabling React Router to manage routing.
-
-### Verification
-- **Vercel**: Test routes like `https://your-vercel-app.vercel.app/route`.
-- **Netlify**: Test routes like `https://your-netlify-app.netlify.app/route`.
-
-If routes work as expected, your deployment is properly configured. 🎉
-
---- 
