@@ -130,25 +130,31 @@ When deploying a React app that uses React Router, you need to ensure proper rou
    ```
 3. This ensures that all routes are redirected to `index.html`, allowing React Router to handle navigation.
 
-### **For Netlify**
-1. Create a `_redirects` file in the root of your project. (no extension required)
-  - project-root/
-      ├── public/
-      ├── src/
-      ├── _redirects
-      ├── package.json
-      ├── README.md
+---
 
-2. Add the following line:
+## **For Netlify**
+1. Create a `_redirects` file in the `public/` folder of your project. [Root directory is not the solution]
+   ```
+   project-root/
+   ├── public/
+   │   ├── _redirects
+   ├── src/
+   ├── package.json
+   ├── README.md
+   ```
+2. Add the following line to the `_redirects` file:
    ```plaintext
    /*    /index.html   200
    ```
-3. This will redirect all routes to `index.html` with a `200 OK` status, enabling React Router to manage routing.
+3. This ensures Netlify redirects all routes to `index.html` with a `200 OK` status, enabling React Router to handle routing.
+
+---
 
 ### Verification
-- **Vercel**: Test routes like `https://your-vercel-app.vercel.app/route`.
-- **Netlify**: Test routes like `https://your-netlify-app.netlify.app/route`.
+- **Vercel**: Test routes like `Not Deployed Yet`
+- **Netlify**: Test routes like `https://react-router-mms.netlify.app/users/1`
 
 If routes work as expected, your deployment is properly configured. 🎉
 
 --- 
+
