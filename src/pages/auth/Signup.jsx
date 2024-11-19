@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TEInput, TERipple } from "tw-elements-react";
 import "tw-elements-react/dist/css/tw-elements-react.min.css";
@@ -32,9 +32,9 @@ const Signup = () => {
   };
   return (
     <div>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-start"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={true}
@@ -43,7 +43,7 @@ const Signup = () => {
         draggable={false}
         pauseOnHover={false}
         theme="colored"
-      />
+      /> */}
       <section className="mt-10">
         <div className="flex justify-end px-10">
           <div> </div>

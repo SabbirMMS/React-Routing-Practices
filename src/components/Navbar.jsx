@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
+import { auth } from "../firebase/firebase.config";
+import { signOut } from "firebase/auth";
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, loading] = useAuthState(auth);
   // Function to compute classes dynamically
   function applyClasses(isActive, isPending) {
     const baseClass =
@@ -13,11 +15,11 @@ function Navbar() {
   }
 
   return (
-    <nav className="flex justify-between items-center bg-gray-50 shadow-lg p-4 sticky top-0 mb-3">
+    <nav className="flex justify-between items-center bg-gray-50 shadow-lg p-4 sticky top-0 mb-3 z-10">
       {/* Logo */}
       <div className="flex items-center space-x-1">
         <img
-          src="./../../public/vite.svg"
+          src="https://i.pinimg.com/550x/39/6c/d8/396cd8e1d8557f73c786892cffa4f13c.jpg"
           alt="Logo"
           className="h-10 w-10 object-cover rounded-full"
         />
@@ -67,20 +69,32 @@ function Navbar() {
 
       {/* Right Side NavLinks */}
       <div className="flex items-center space-x-1">
-        {isLoggedIn ? (
+        {loading ? (
+          ""
+        ) : user ? (
           <>
             {/* Show Logout NavLink when logged in */}
-            <NavLink to={'/'} className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700">
+            <NavLink
+              to={"/"}
+              className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700"
+              onClick={async () => await signOut(auth)}
+            >
               Logout
             </NavLink>
           </>
         ) : (
           <>
             {/* Show Login and Sign Up NavLinks when not logged in */}
-            <NavLink  to={'/login'}  className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700">
+            <NavLink
+              to={"/login"}
+              className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700"
+            >
               Login
             </NavLink>
-            <NavLink  to={'/signup'}  className="px-4 py-2 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow hover:bg-gray-300">
+            <NavLink
+              to={"/signup"}
+              className="px-4 py-2 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow hover:bg-gray-300"
+            >
               Sign Up
             </NavLink>
           </>

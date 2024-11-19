@@ -2,13 +2,18 @@
 
 import {
   createUserWithEmailAndPassword,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./firebase.config";
+import { toast } from "react-toastify";
 
 const registerUserWithEmailPassword = async (name, email, password) => {
   try {
@@ -43,13 +48,77 @@ const sendResetPassword = async (email) => {
   }
 };
 
-// export { registerUserWithEmailPassword, loginWithEmailAndPassword,sendResetPassword };
+/**
+ *
+ * Firebase authentication setup
+ * Provider setup
+ *
+ */
+
+// Google Login
+const googleAuth = new GoogleAuthProvider();
+const loginWithGoogle = async () => {
+  try {
+    // const response = await auth.signInWithPopup(googleAuth);
+    const response = await signInWithPopup(auth, googleAuth);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+// GitHub Login
+const githubAuth = new GithubAuthProvider();
+const loginWithGitHub = async () => {
+  try {
+    const response = await signInWithPopup(auth, githubAuth);
+    // return response;
+
+    // My part Starts --- >
+    const user = response.user;
+    if (user.emailVerified) {
+      return user; // Allow access
+    } else {
+      console.warn("Email is not verified. Prompt user to verify.");
+      await sendEmailVerification(user); // Optionally send verification email
+      // toast.error("Your email is not verified. A verification email has been sent to your inbox.")
+      throw new Error(
+        `Your email is not verified. A verification email has been sent to your inbox for ${user.email}`
+      );
+    }
+    // My part Ends --- >
+  } catch (error) {
+    throw error;
+  }
+};
+// Facebook Login
+const facebookAuth = new FacebookAuthProvider();
+const loginWithFacebook = async () => {
+  try {
+    const response = await signInWithPopup(auth, facebookAuth);
+    // return response;
+
+    // My part Starts --- >
+    const user = response.user;
+    if (user.emailVerified) {
+      return user; // Allow access
+    } else {
+      console.warn("Email is not verified. Prompt user to verify.");
+      await sendEmailVerification(user); // Optionally send verification email
+      throw new Error(
+        `Your email is not verified. A verification email has been sent to your inbox for  ${user.email}`
+      );
+    }
+    // My part Ends --- >
+  } catch (error) {
+    throw error;
+  }
+};
 
 export {
   registerUserWithEmailPassword,
   loginWithEmailAndPassword,
   sendResetPassword,
-  // loginWithGoogle,
-  // loginWithGithub,
-  // loginInWithFacebook,
+  loginWithGoogle,
+  loginWithGitHub,
+  loginWithFacebook,
 };

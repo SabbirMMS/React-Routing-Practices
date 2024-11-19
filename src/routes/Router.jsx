@@ -10,11 +10,13 @@ import UserError from "../components/UserError";
 import Signup from "../pages/auth/Signup";
 import Login from "../pages/auth/Login";
 import ForgetPassword from "../pages/auth/ForgetPassword";
+import { loadData, loadSingleData } from "../utils/utils";
+import PrivateRouter from "../pages/auth/PrivateRouter";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, 
+    element: <Layout />,
     children: [
       {
         path: "",
@@ -22,8 +24,13 @@ const router = createBrowserRouter([
       },
       {
         path: "users",
-        element: <Users />,
-        loader: () => fetch("https://jsonplaceholder.typicode.com/users"),
+        element: (
+          <PrivateRouter>
+            <Users />
+          </PrivateRouter>
+        ),
+        // loader: () => fetch("https://jsonplaceholder.typicode.com/users"), // Working line
+        loader: loadData,
         /*children:[
                         {
                             path:":id",
@@ -38,10 +45,11 @@ const router = createBrowserRouter([
         path: "users/:id",
         element: <UserDetails />,
         errorElement: <UserError />,
-        loader: (match) =>
-          fetch(
-            `https://jsonplaceholder.typicode.com/users/${match.params.id}`
-          ),
+        // loader: (match) =>
+        //   fetch(
+        //     `https://jsonplaceholder.typicode.com/users/${match.params.id}`
+        //   ),
+        loader: (match) => loadSingleData(match.params.id),
       },
       {
         path: "about",

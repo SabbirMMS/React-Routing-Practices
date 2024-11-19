@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import { TEInput, TERipple } from "tw-elements-react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import SocialLogin from "./SocialLogin";
@@ -29,18 +29,7 @@ const Login = () => {
 
   return (
     <section className="mt-10">
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={true}
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={false}
-        pauseOnHover={false}
-        theme="colored"
-      />
+      
       <div className="flex justify-end px-10">
         <div> </div>
         <div>

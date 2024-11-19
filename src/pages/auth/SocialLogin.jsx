@@ -1,15 +1,47 @@
 /* eslint-disable react/prop-types */
 import { TERipple } from "tw-elements-react";
+import {
+  loginWithFacebook,
+  loginWithGitHub,
+  loginWithGoogle,
+} from "../../firebase/firebase";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
-  async function onLoginWithGoogle() {
+  const navigate = useNavigate();
 
+  async function onLoginWithGoogle() {
+    try {
+      await loginWithGoogle();
+      toast.success(`Log In Successfully with Google`, {
+        onClose: () => navigate("/"),
+      });
+    } catch (error) {
+      toast.error("An error occurred during login", error);
+    }
   }
   async function onLoginWithGithub() {
-
+    try {
+      await loginWithGitHub();
+      toast.success(`Log In Successfully with Github`, {
+        onClose: () => navigate("/"),
+      });
+    } catch (error) {
+      toast.error(`An error occurred during login: ${error.message}`);
+      console.log(error);
+    }
   }
   async function onLoginWithFacebook() {
-    
+    try {
+      await loginWithFacebook();
+      toast.success(`Log In Successfully with Facebook`, {
+        onClose: () => navigate("/"),
+      });
+    } catch (error) {
+      toast.error(`An error occurred during login: ${error.message}`);
+      console.log(error);
+    }
   }
 
   return (
