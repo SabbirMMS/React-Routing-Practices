@@ -8,6 +8,8 @@ import Layout from "../pages/layouts/Layout";
 import UserDetails from "../components/UserDetails";
 import UserError from "../components/UserError";
 import Signup from "../pages/auth/Signup";
+import Login from "../pages/auth/Login";
+import ForgetPassword from "../pages/auth/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/reset",
+    element: <ForgetPassword />,
   },
   {
     path: "/*",

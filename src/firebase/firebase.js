@@ -3,6 +3,7 @@
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -23,4 +24,12 @@ const registerUserWithEmailPassword = async (name, email, password) => {
     throw error;
   }
 };
+
+const loginWithEmailPassword = async (email, password) => {
+  try {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    
+  } catch (ignored) {}
+};
+
 export { registerUserWithEmailPassword };
