@@ -1,6 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/firebase.config";
 import Loading from "../components/Loading ";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [user, loading] = useAuthState(auth);
@@ -23,12 +24,12 @@ const Home = () => {
           </p>
           {!user && (
             <div className="mt-6">
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className="px-6 py-3 bg-white text-primary rounded-md shadow-md font-medium text-sm uppercase hover:bg-primary-accent-100"
               >
                 Get Started
-              </a>
+              </Link>
             </div>
           )}
         </div>

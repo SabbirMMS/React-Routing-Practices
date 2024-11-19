@@ -14,9 +14,12 @@ const SocialLogin = () => {
   async function onLoginWithGoogle() {
     try {
       await loginWithGoogle();
-      toast.success(`Log In Successfully with Google`, {
+      navigate("/");
+      toast.success(
+        `Log In Successfully with Google` /*, {
         onClose: () => navigate("/"),
-      });
+      }*/
+      );
     } catch (error) {
       toast.error("An error occurred during login", error);
     }
@@ -24,9 +27,12 @@ const SocialLogin = () => {
   async function onLoginWithGithub() {
     try {
       await loginWithGitHub();
-      toast.success(`Log In Successfully with Github`, {
+      navigate("/");
+      toast.success(
+        `Log In Successfully with Github` /*, {
         onClose: () => navigate("/"),
-      });
+      }*/
+      );
     } catch (error) {
       toast.error(`An error occurred during login: ${error.message}`);
       console.log(error);
@@ -35,9 +41,12 @@ const SocialLogin = () => {
   async function onLoginWithFacebook() {
     try {
       await loginWithFacebook();
-      toast.success(`Log In Successfully with Facebook`, {
+      navigate("/");
+      toast.success(
+        `Log In Successfully with Facebook` /*, {
         onClose: () => navigate("/"),
-      });
+      }*/
+      );
     } catch (error) {
       toast.error(`An error occurred during login: ${error.message}`);
       console.log(error);
