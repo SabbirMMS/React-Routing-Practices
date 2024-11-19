@@ -1,20 +1,19 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../../firebase/firebase.config";
+import { sendResetPassword } from "../../firebase/firebase";
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const handlePasswordReset = async () => {
     try {
-      //   await sendResetPassword(email);
+      await sendResetPassword(email);
 
-      const sendResetPassword = async (email) => {
-        await sendPasswordResetEmail(auth, email);
-      };
-      sendResetPassword(email);
+      // const sendResetPassword = async (email) => {
+      //   await sendPasswordResetEmail(auth, email);
+      // };
+      // sendResetPassword(email);
 
       toast.success("Password reset email sent successfully!", {
         onClose: () => navigate("/login"),

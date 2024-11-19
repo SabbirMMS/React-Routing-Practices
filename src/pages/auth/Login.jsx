@@ -4,8 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { TEInput, TERipple } from "tw-elements-react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import SocialLogin from "./SocialLogin";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase.config";
+import { loginWithEmailAndPassword } from "../../firebase/firebase";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,9 +15,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // await loginWithEmailAndPassword(email, password);
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
+      await loginWithEmailAndPassword(email, password);
+      // const response = await signInWithEmailAndPassword(auth, email, password);
+      // console.log(response);
       toast.success("Logged in successfully!", {
         onClose: () => navigate("/"),
         toastId: "success1",

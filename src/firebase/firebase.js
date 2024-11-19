@@ -3,6 +3,7 @@
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -25,11 +26,30 @@ const registerUserWithEmailPassword = async (name, email, password) => {
   }
 };
 
-const loginWithEmailPassword = async (email, password) => {
+const loginWithEmailAndPassword = async (email, password) => {
   try {
     const response = await signInWithEmailAndPassword(auth, email, password);
-    
-  } catch (ignored) {}
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };
 
-export { registerUserWithEmailPassword };
+const sendResetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// export { registerUserWithEmailPassword, loginWithEmailAndPassword,sendResetPassword };
+
+export {
+  registerUserWithEmailPassword,
+  loginWithEmailAndPassword,
+  sendResetPassword,
+  // loginWithGoogle,
+  // loginWithGithub,
+  // loginInWithFacebook,
+};
